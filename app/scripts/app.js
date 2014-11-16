@@ -28,10 +28,6 @@ angular
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
       })
-      .when('/list', {
-        templateUrl: 'views/list.html',
-        controller: 'ListCtrl'
-      })
       .otherwise({
         redirectTo: '/'
       });
