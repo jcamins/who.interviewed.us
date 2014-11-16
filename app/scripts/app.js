@@ -16,7 +16,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'apptrack.services'
+    'apptrack.services',
+    'siyfion.sfTypeahead'
   ])
   .config(function ($routeProvider) {
     $routeProvider
