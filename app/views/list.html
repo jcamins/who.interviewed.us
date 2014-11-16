@@ -44,6 +44,31 @@
                         </div>
                     </div>
                 </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3 class="panel-title">Interviews</h3></div>
+                    <div class="panel-group" id="interviewsAccordion" role="tablist" aria-multieselectable="true">
+                        <div class="panel panel-default" ng-repeat="interview in current.interviews">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label>Type</label>
+                                    <input class="form-control" type="text" ng-model="interview.type">
+                                </div>
+                                <div class="form-group">
+                                    <label>Date</label>
+                                    <input class="form-control" type="text" ng-model="interview.date">
+                                </div>
+                                <div class="form-group">
+                                    <label>Person</label>
+                                    <input class="form-control" type="text" ng-model="interview.person">
+                                </div>
+                                <div class="form-group">
+                                    <label>Feedback</label>
+                                    <input class="form-control" type="text" ng-model="interview.feedback">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
