@@ -1,12 +1,21 @@
 <h3>Application list</h3>
-<input type="text" id="searchTextBox" ng-model="filterService.searchText">
-<table class="table"><thead><tr><th>Position</th><th>Company</th><th>Recruiter</th><th>Interviews</th></tr></thead>
-<tbody>
-    <tr class="jobapps" ng-repeat="jobapp in jobapps | filter:filterService.searchText">
-        <td>{{jobapp.position}}</td>
-        <td><a href="{{jobapp.site}}">{{jobapp.company}}</a></td>
-        <td>{{jobapp.recruiter.person}} ({{jobapp.recruiter.company}})</td>
-        <td>{{jobapp.interviews.length}}</td>
-    </tr>
-</tbody>
-</table>
+<div class="row">
+    <div class="col-md-6">
+        <input class="pull-right" type="text" id="searchTextBox" ng-model="filterService.searchText" placeholder="Filter">
+        <table class="table">
+            <thead><tr><th>Position</th><th>Company</th><th>Recruiter</th><th>Interviews</th></tr></thead>
+            <tbody>
+                <tr class="jobapps" ng-repeat="jobapp in jobapps | filter:filterService.searchText">
+                    <td>{{jobapp.position}}</td>
+                    <td><a href="{{jobapp.site}}">{{jobapp.company}}</a></td>
+                    <td>{{jobapp.recruiter.person}} ({{jobapp.recruiter.company}})</td>
+                    <td>{{jobapp.interviews.length}}</td>
+                    <td><button ng-click="$parent.current = jobapp">View</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <input type="text" ng-model="current.position">
+    </div>
+</div>
