@@ -1,0 +1,11 @@
+<h3>Application list</h3>
+<table><thead><tr><th>Position</th><th>Company</th><th>Recruiter</th><th>Interviews</th></tr></thead>
+<tbody>
+    <tr class="jobapps" ng-repeat="jobapp in jobapps">
+        <td>{{jobapp.position}}</td>
+        <td><a href="{{jobapp.site}}">{{jobapp.company}}</a></td>
+        <td>{{jobapp.recruiter.person}} ({{jobapp.recruiter.company}})</td>
+        <td>{{jobapp.interviews.length}}</td>
+    </tr>
+</tbody>
+</table>
