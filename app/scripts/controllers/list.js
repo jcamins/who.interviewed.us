@@ -1,8 +1,9 @@
 'use strict';
 
-angular.module('apptrackApp')
-    .controller('ListCtrl', ['$scope', '$resource', function ($scope, $resource) {
-        $resource('/applications.json').query(function (jobapps) {
-            $scope.jobapps = jobapps;
-        });
-    }]);
+var app = angular.module('apptrackApp');
+
+app.controller('ListCtrl', ['$scope', '$resource', 'JobApp', function ($scope, $resource, JobApp) {
+    JobApp.query(function (jobapps) {
+        $scope.jobapps = jobapps;
+    });
+}]);

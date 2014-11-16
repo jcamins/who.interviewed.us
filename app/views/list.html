@@ -1,7 +1,8 @@
 <h3>Application list</h3>
-<table><thead><tr><th>Position</th><th>Company</th><th>Recruiter</th><th>Interviews</th></tr></thead>
+<input type="text" id="searchTextBox" ng-model="filterService.searchText">
+<table class="table"><thead><tr><th>Position</th><th>Company</th><th>Recruiter</th><th>Interviews</th></tr></thead>
 <tbody>
-    <tr class="jobapps" ng-repeat="jobapp in jobapps">
+    <tr class="jobapps" ng-repeat="jobapp in jobapps | filter:filterService.searchText">
         <td>{{jobapp.position}}</td>
         <td><a href="{{jobapp.site}}">{{jobapp.company}}</a></td>
         <td>{{jobapp.recruiter.person}} ({{jobapp.recruiter.company}})</td>
