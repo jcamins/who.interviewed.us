@@ -18,7 +18,8 @@ angular
     'ngTouch',
     'apptrack.services',
     'siyfion.sfTypeahead',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'apptrack.directives'
   ])
   .config(function ($routeProvider) {
     $routeProvider
