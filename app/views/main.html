@@ -46,9 +46,12 @@
                         </div>
                     </div>
                 </div>
-                <h4>Interviews</h4>
+                <h4>Interviews <button class="pull-right btn btn-xs"><i class="glyphicon glyphicon-plus" ng-click="newInterview()"></i></button></h4>
                 <accordion>
                     <accordion-group heading="{{interview.type}}" is-open="interview.new" ng-repeat="interview in current.interviews">
+                        <accordion-heading>
+                            {{interview.type}} <button class="pull-right btn btn-xs" ng-click="removeInterview(interview, $event)"><i class="glyphicon glyphicon-minus"></i></button>
+                        </accordion-heading>
                         <div>
                             <div class="form-group">
                                 <label class="sr-only">Type</label>

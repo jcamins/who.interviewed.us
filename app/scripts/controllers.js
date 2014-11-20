@@ -10,6 +10,19 @@ var app = angular.module('apptrackApp');
  * Controller of the apptrackApp
  */
 app.controller('MainCtrl', ['$scope', '$resource', 'JobApp', function ($scope, $resource, JobApp) {
+    $scope.newInterview = function () {
+        $scope.current.interviews = $scope.current.interviews || [ ];
+        $scope.current.interviews.push({ new: true });
+    };
+    $scope.removeInterview = function (interview, $event) {
+        var index = $scope.current.interviews.indexOf(interview);
+        if (index > -1) {
+            $scope.current.interviews.splice(index, 1);
+            if ($event) {
+                $event.preventDefault();
+            }
+        }
+    };
     JobApp.query(function (jobapps) {
         $scope.jobapps = jobapps;
     });
