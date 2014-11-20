@@ -38,6 +38,9 @@ app.controller('MainCtrl', ['$scope', '$resource', 'JobApp', function ($scope, $
     };
 }]);
 
+app.controller('EditCtrl', function() {
+});
+
 app.controller('AboutCtrl', ['$scope', function ($scope) {
     $scope.about = true;
 }]);
