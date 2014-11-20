@@ -10,62 +10,73 @@
                     <td><a href="{{jobapp.site}}">{{jobapp.company}}</a></td>
                     <td>{{jobapp.recruiter.person}} ({{jobapp.recruiter.company}})</td>
                     <td>{{jobapp.interviews.length}}</td>
-                    <td><button ng-click="$parent.current = jobapp">View</button></td>
+                    <td><button class="btn btn-sm" ng-click="$parent.current = jobapp">View</button></td>
                 </tr>
             </tbody>
         </table>
     </div>
     <div class="col-md-6" ng-show="current">
         <div class="panel panel-default">
-            <div class="panel-body">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><h3 class="panel-title">Essentials</h3></div>
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <label>Position</label>
-                            <input class="form-control" type="text" ng-model="current.position">
-                        </div>
-                        <div class="form-group">
-                            <label>Company</label>
-                            <input class="form-control" type="text" ng-model="current.company">
+            <div class="panel-body form-inline">
+                <div>
+                    <h4>Position</h3>
+                    <div class="form-group">
+                        <label class="sr-only" for="form-job-title">Job title</label>
+                        <input id="form-job-title" class="form-control" type="text" placeholder="Title" ng-model="current.position">
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <label class="sr-only" for="form-job-company">Company</label>
+                            <div class="input-group-addon">at</div>
+                            <input id="form-job-company" class="form-control" type="text" placeholder="Company" ng-model="current.company">
                         </div>
                     </div>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading"><h3 class="panel-title">Recruiter</h3></div>
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <label>Company</label>
-                            <input class="form-control sf-typeahead" type="text" datasets="recruitercompanies" ng-model="current.recruiter.company">
-                        </div>
-                        <div class="form-group">
-                            <label>Person</label>
-                            <input class="form-control" type="text" ng-model="current.recruiter.person">
+                <div>
+                    <h4>Recruiter</h4>
+                    <div class="form-group">
+                        <label class="sr-only" for="form-recruiter-person">Person</label>
+                        <input id="form-recruiter-person" class="form-control" type="text" placeholder="Person" ng-model="current.recruiter.person">
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <label class="sr-only" for="form-recruiter-company">Company</label>
+                            <div class="input-group-addon">at</div>
+                            <input id="form-recruiter-company" class="form-control sf-typeahead" type="text" datasets="recruitercompanies" placeholder="Company" ng-model="current.recruiter.company">
                         </div>
                     </div>
                 </div>
                 <h4>Interviews</h4>
                 <accordion>
-                    <accordion-group heading="{{interview.type}}" ng-repeat="interview in current.interviews">
-                        <div class="form-group">
-                            <label>Type</label>
-                            <input class="form-control" type="text" ng-model="interview.type">
-                        </div>
-                        <div class="form-group">
-                            <label>Date</label>
-                            <input class="form-control" type="text" ng-model="interview.date">
-                        </div>
-                        <div class="form-group">
-                            <label>Person</label>
-                            <input class="form-control" type="text" ng-model="interview.person">
-                        </div>
-                        <div class="form-group">
-                            <label>Feedback</label>
-                            <input class="form-control" type="text" ng-model="interview.feedback">
+                    <accordion-group heading="{{interview.type}}" is-open="interview.new" ng-repeat="interview in current.interviews">
+                        <div>
+                            <div class="form-group">
+                                <label class="sr-only">Type</label>
+                                <input class="form-control" type="text" ng-model="interview.type">
+                                <div class="input-group">
+                                    <label class="sr-only">Interview date</label>
+                                    <div class="input-group-addon">on</div>
+                                    <input type="text" class="form-control" placeholder="Interview date" ng-model="interview.date" close-text="Close" />
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <label class="sr-only">Interviewer</label>
+                                    <div class="input-group-addon">with</div>
+                                    <input class="form-control" type="text" placeholder="Interviewer" ng-model="interview.person">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label>Feedback</label>
+                                    <textarea class="form-control" type="text" rows="6" placeholder="Feedback" ng-model="interview.feedback"></textarea>
+                                </div>
+                            </div>
                         </div>
                     </accordion-group>
                 </accordion>
-                <button>Save</button>
+                <button class="btn btn-sm btn-primary">Save</button>
             </div>
         </div>
     </div>
