@@ -12,7 +12,7 @@ services.factory('JobApp', ['$resource', function($resource) {
         }
         return jobapp;
     }
-    return $resource('/applications.json', { }, {
+    return $resource('/applications', { }, {
         query: {
             interceptor: {
                 response: function (res) {

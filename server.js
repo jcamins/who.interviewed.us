@@ -26,7 +26,7 @@ app.use('/bower_components', express.static(path.normalize(__dirname + '/bower_c
 
 mongoose.connect('mongodb://127.0.0.1:27017/apptrack');
 
-var Interaction = mongoose.Schema({
+var Interview = mongoose.Schema({
     type: String,
     date: Date,
     person: String,
@@ -40,7 +40,7 @@ var Application = restful.model('application', mongoose.Schema({
         company: String,
         person: String
     },
-    interactions: [ Interaction ]
+    interviews: [ Interview ]
 })).methods(['get', 'post', 'put', 'delete']);
 Application.register(app, '/applications');
 
