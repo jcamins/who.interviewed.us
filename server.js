@@ -42,7 +42,7 @@ var Application = restful.model('application', mongoose.Schema({
     },
     interviews: [ Interview ]
 })).methods(['get', 'post', 'put', 'delete']);
-Application.register(app, '/applications');
+Application.register(app, '/application');
 
 app.listen(10000, function () {
     console.log('Server started on port 10000');
