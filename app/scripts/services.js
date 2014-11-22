@@ -15,7 +15,9 @@ services.factory('JobApp', ['$resource', function($resource) {
     var resource = $resource('/application/:id', { id: '@_id' }, {
         query: {
             transformResponse: [ angular.fromJson, function (data) {
-                data.forEach(processJobApp);
+                if (data && data.forEach) {
+                    data.forEach(processJobApp);
+                }
                 return data;
             } ],
             isArray: true

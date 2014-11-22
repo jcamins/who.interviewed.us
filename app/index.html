@@ -22,22 +22,25 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container-fluid">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a ng-href="#">Home</a></li>
-          <li><a ng-href="#/about">About</a></li>
-          <li><a ng-href="#">Contact</a></li>
-        </ul>
-        <h3 class="text-muted">Crystal Slipper</h3>
-      </div>
+    <header>
+        <nav class="navbar navbar-default navbar-static-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Crystal Slipper</a>
+                </div>
+                <ul class="nav navbar-nav pull-right">
+                    <li><a ng-href="#/about">About</a></li>
+                    <li><a ng-href="#">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
 
-      <div ng-view=""></div>
+    <div class="container-fluid" ng-view=""></div>
 
-      <div class="footer">
-        <p>Application tracker</p>
-      </div>
-    </div>
+    <footer>
+        Crystal Slipper &copy; 2014 C &amp; P Bibliography Services
+    </footer>
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->

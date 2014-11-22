@@ -73,11 +73,12 @@ passport.use(new GoogleStrategy({
 ));
 
 function loggedIn(req, res, next) {
-    if (typeof req.session.passport.user !== 'undefined') {
+    if (typeof req.session !== 'undefined' && typeof req.session.passport !== 'undefined' && typeof req.session.passport.user !== 'undefined') {
         if (typeof next === 'function') {
             return next();
         }
     }
+    res.status(401).send({ });
 }
 
 app.get('/auth/google', passport.authenticate('google', { scope: 'https://www.googleapis.com/auth/userinfo.email' }));
