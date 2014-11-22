@@ -69,9 +69,8 @@ app.controller('MainCtrl', ['$scope', '$resource', '$timeout', 'JobApp', functio
     });
 }]);
 
-app.controller('EditCtrl', function() {
+app.controller('LoginCtrl', function() {
 });
 
 app.controller('AboutCtrl', ['$scope', function ($scope) {
-    $scope.about = true;
 }]);
