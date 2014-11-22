@@ -25,13 +25,18 @@ app.controller('MainCtrl', ['$scope', '$resource', '$timeout', 'JobApp', functio
         }
     };
     $scope.saveApplication = function () {
+        var isnew = typeof $scope.current._id === 'undefined'
         delete $scope.current.dirty;
         $scope.current.$save().then(function (rec) {
-            rec.dirty = false;
-            if (typeof $scope.current._id === 'undefined') {
+            $scope.currentForm.$setPristine(true);
+            if (isnew) {
                 $scope.jobapps.push(rec);
             }
         });
+    };
+    $scope.removeApplication = function (jobapp) {
+        jobapp.$delete();
+        $scope.jobapps.splice($scope.jobapps.indexOf(jobapp), 1);
     };
     $scope.removeInterview = function (interview, $event) {
         var index = $scope.current.interviews.indexOf(interview);

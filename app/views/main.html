@@ -3,14 +3,15 @@
     <div class="col-md-6">
         <input class="pull-right" type="text" id="searchTextBox" ng-model="filterService.searchText" placeholder="Filter">
         <table class="table">
-            <thead><tr><th>Position</th><th>Company</th><th>Recruiter</th><th>Interviews</th></tr></thead>
+            <thead><tr><th></th><th>Position</th><th>Company</th><th>Recruiter</th><th>Interviews</th></tr></thead>
             <tbody>
                 <tr class="jobapps" ng-repeat="jobapp in jobapps | filter:filterService.searchText">
+                    <td><button class="btn btn-xs" ng-click="removeApplication(jobapp)"><i class="glyphicon glyphicon-remove"></i></button></td>
                     <td>{{jobapp.position}}</td>
                     <td><a href="{{jobapp.site}}">{{jobapp.company}}</a></td>
                     <td>{{jobapp.recruiter.person}} ({{jobapp.recruiter.company.name}})</td>
                     <td>{{jobapp.interviews.length}}</td>
-                    <td><button class="btn btn-sm" ng-click="selectApplication(jobapp)"><i class="glyphicon glyphicon-pencil"></i></button></td>
+                    <td><button class="btn btn-xs" ng-click="selectApplication(jobapp)"><i class="glyphicon glyphicon-pencil"></i></button></td>
                 </tr>
             </tbody>
         </table>
@@ -36,7 +37,7 @@
                         </div>
                     </div>
                 </div>
-                <h4>Interviews <button class="pull-right btn btn-xs"><i class="glyphicon glyphicon-plus" ng-click="current.interviews.push({})"></i></button></h4>
+                <h4>Interviews <button class="btn btn-xs"><i class="glyphicon glyphicon-plus" ng-click="current.interviews.push({})"></i></button></h4>
                 <accordion>
                     <accordion-group heading="{{interview.type}}" is-open="$last" ng-repeat="interview in current.interviews">
                         <accordion-heading>
