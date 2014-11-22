@@ -2,24 +2,24 @@
 
 /**
  * @ngdoc overview
- * @name apptrackApp
+ * @name crystalSlipperApp
  * @description
- * # apptrackApp
+ * # crystalSlipperApp
  *
  * Main module of the application.
  */
 angular
-  .module('apptrackApp', [
+  .module('crystalSlipperApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'apptrack.services',
+    'crystalSlipper.services',
     'siyfion.sfTypeahead',
     'ui.bootstrap',
-    'apptrack.directives'
+    'crystalSlipper.directives'
   ])
   .config(function ($routeProvider) {
     $routeProvider

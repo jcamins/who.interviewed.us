@@ -1,6 +1,6 @@
 {
-  "name": "apptrack",
-  "version": "0.0.0",
+  "name": "crystalSlipper",
+  "version": "0.0.1",
   "dependencies": {
     "cookie-parser": "^1.3.3",
     "passport-local": "^1.0.0",

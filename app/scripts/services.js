@@ -1,6 +1,6 @@
 'use strict';
 
-var services = angular.module('apptrack.services', ['ngResource']);
+var services = angular.module('crystalSlipper.services', ['ngResource']);
 
 services.factory('JobApp', ['$resource', function($resource) {
     function processJobApp(jobapp) {

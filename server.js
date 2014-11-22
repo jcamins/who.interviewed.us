@@ -19,11 +19,11 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 //app.use(morgan(':remote-addr - - [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent" (:response-time ms)'));
-app.use(session({ secret: 'd7c067b3868afdfaa87177c650a872006cdca049', resave: true, saveUninitialized: true, store: new MongoStore({ db: 'apptrack' }) }));
+app.use(session({ secret: 'd7c067b3868afdfaa87177c650a872006cdca049', resave: true, saveUninitialized: true, store: new MongoStore({ db: 'crystalSlipper' }) }));
 
 app.use(express.static(path.normalize(__dirname + '/app')));
 app.use('/bower_components', express.static(path.normalize(__dirname + '/bower_components')));
-mongoose.connect('mongodb://127.0.0.1:27017/apptrack');
+mongoose.connect('mongodb://127.0.0.1:27017/crystalSlipper');
 
 var Interview = mongoose.Schema({
     type: String,
