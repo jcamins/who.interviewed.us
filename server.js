@@ -37,7 +37,10 @@ var Application = restful.model('application', mongoose.Schema({
     company: String,
     position: String,
     recruiter: {
-        company: String,
+        company: {
+            name: String,
+            url: String
+        },
         person: String
     },
     interviews: [ Interview ]

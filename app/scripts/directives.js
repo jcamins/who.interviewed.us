@@ -36,6 +36,6 @@ directives.directive('cpInput', function() {
             type: '@',
             rows: '@'
         },
-        template: '<div ng-switch="type" class="input-group"><label class="sr-only">{{label}}</label><div class="input-group-addon" ng-show="prefix">{{prefix}}</div><textarea ng-switch-when="textarea" class="form-control" rows="{{rows}}" placeholder="{{label}}" ng-model="ngModel"/><input ng-switch-default type="text" class="form-control" placeholder="{{label}}" ng-model="ngModel" /><div class="input-group-addon" ng-show="suffix">{{suffix}}</div></div>'
+        template: '<div class="input-group"><label class="sr-only">{{label}}</label><div class="input-group-addon" ng-show="prefix">{{prefix}}</div><input type="text" class="form-control" placeholder="{{label}}" ng-model="ngModel" /><div class="input-group-addon" ng-show="suffix">{{suffix}}</div></div>'
     };
 });

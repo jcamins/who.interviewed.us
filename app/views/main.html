@@ -1,4 +1,4 @@
-<h3 class="center-block">Application list</h3>
+<h3>Application list <button class="btn btn-xs"><i class="glyphicon glyphicon-plus" ng-click="newApplication()"></i></button></h3>
 <div class="row">
     <div class="col-md-6">
         <input class="pull-right" type="text" id="searchTextBox" ng-model="filterService.searchText" placeholder="Filter">
@@ -8,7 +8,7 @@
                 <tr class="jobapps" ng-repeat="jobapp in jobapps | filter:filterService.searchText">
                     <td>{{jobapp.position}}</td>
                     <td><a href="{{jobapp.site}}">{{jobapp.company}}</a></td>
-                    <td>{{jobapp.recruiter.person}} ({{jobapp.recruiter.company}})</td>
+                    <td>{{jobapp.recruiter.person}} ({{jobapp.recruiter.company.name}})</td>
                     <td>{{jobapp.interviews.length}}</td>
                     <td><button class="btn btn-sm" ng-click="$parent.current = jobapp">View</button></td>
                 </tr>
@@ -32,13 +32,13 @@
                         <div class="input-group">
                             <label class="sr-only" for="form-recruiter-company">Company</label>
                             <div class="input-group-addon">at</div>
-                            <input id="form-recruiter-company" class="form-control sf-typeahead" type="text" datasets="recruitercompanies" placeholder="Company" ng-model="current.recruiter.company">
+                            <input id="form-recruiter-company" class="form-control sf-typeahead" type="text" datasets="recruitercompanies" placeholder="Company" ng-model="current.recruiter.company"><a class="input-group-addon" target="_blank" href="{{current.recruiter.company.url}}"><i class="glyphicon glyphicon-link"></i></a>
                         </div>
                     </div>
                 </div>
-                <h4>Interviews <button class="pull-right btn btn-xs"><i class="glyphicon glyphicon-plus" ng-click="newInterview()"></i></button></h4>
+                <h4>Interviews <button class="pull-right btn btn-xs"><i class="glyphicon glyphicon-plus" ng-click="current.interviews.push({})"></i></button></h4>
                 <accordion>
-                    <accordion-group heading="{{interview.type}}" is-open="interview.new" ng-repeat="interview in current.interviews">
+                    <accordion-group heading="{{interview.type}}" is-open="$last" ng-repeat="interview in current.interviews">
                         <accordion-heading>
                             {{interview.type}} <button class="pull-right btn btn-xs" ng-click="removeInterview(interview, $event)"><i class="glyphicon glyphicon-minus"></i></button>
                         </accordion-heading>
@@ -57,7 +57,7 @@
                         </div>
                     </accordion-group>
                 </accordion>
-                <button class="btn btn-sm btn-primary" ng-click="current.$save()">Save</button>
+                <button class="btn btn-sm btn-primary" ng-click="saveApplication()">Save</button>
             </div>
         </div>
     </div>
