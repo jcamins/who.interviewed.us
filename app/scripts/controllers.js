@@ -9,13 +9,28 @@ var app = angular.module('apptrackApp');
  * # MainCtrl
  * Controller of the apptrackApp
  */
-app.controller('MainCtrl', ['$scope', '$resource', 'JobApp', function ($scope, $resource, JobApp) {
+app.controller('MainCtrl', ['$scope', '$resource', '$timeout', 'JobApp', function ($scope, $resource, $timeout, JobApp) {
     $scope.newApplication = function () {
         $scope.current = new JobApp({ interviews: [ ] });
     };
+    $scope.selectApplication = function (jobapp) {
+        if ($scope.currentForm.$dirty) {
+            $scope.current.dirty = true;
+        }
+        $scope.current = jobapp;
+        if (!$scope.current.dirty) {
+            $timeout(function () {
+                $scope.currentForm.$setPristine(true);
+            });
+        }
+    };
     $scope.saveApplication = function () {
+        delete $scope.current.dirty;
         $scope.current.$save().then(function (rec) {
-            jobapps.push(rec);
+            rec.dirty = false;
+            if (typeof $scope.current._id === 'undefined') {
+                $scope.jobapps.push(rec);
+            }
         });
     };
     $scope.removeInterview = function (interview, $event) {

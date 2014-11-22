@@ -10,14 +10,14 @@
                     <td><a href="{{jobapp.site}}">{{jobapp.company}}</a></td>
                     <td>{{jobapp.recruiter.person}} ({{jobapp.recruiter.company.name}})</td>
                     <td>{{jobapp.interviews.length}}</td>
-                    <td><button class="btn btn-sm" ng-click="$parent.current = jobapp">View</button></td>
+                    <td><button class="btn btn-sm" ng-click="selectApplication(jobapp)"><i class="glyphicon glyphicon-pencil"></i></button></td>
                 </tr>
             </tbody>
         </table>
     </div>
     <div class="col-md-6" ng-show="current">
         <div class="panel panel-default">
-            <div class="panel-body form-inline">
+            <form name="currentForm" class="panel-body form-inline">
                 <div>
                     <h4>Position</h3>
                     <div class="form-group">
@@ -57,8 +57,8 @@
                         </div>
                     </accordion-group>
                 </accordion>
-                <button class="btn btn-sm btn-primary" ng-click="saveApplication()">Save</button>
-            </div>
+                <button class="btn btn-sm btn-primary" ng-click="saveApplication()" ng-disabled="currentForm.$invalid || !currentForm.$dirty">Save</button>
+            </form>
         </div>
     </div>
 </div>
