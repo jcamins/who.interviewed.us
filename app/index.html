@@ -29,6 +29,7 @@
                     <a class="navbar-brand" href="/">Crystal Slipper</a>
                 </div>
                 <ul class="nav navbar-nav pull-right">
+                    <li ng-show="user"><a href="/auth/logout">Logout</a></li>
                     <li><a ng-href="#/about">About</a></li>
                     <li><a ng-href="#">Contact</a></li>
                 </ul>
@@ -39,7 +40,9 @@
     <div class="container-fluid" ng-view=""></div>
 
     <footer>
+        <div class="container-fluid">
         Crystal Slipper &copy; 2014 C &amp; P Bibliography Services
+        </div>
     </footer>
 
 

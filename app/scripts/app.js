@@ -21,17 +21,36 @@ angular
     'ui.bootstrap',
     'crystalSlipper.directives'
   ])
-  .config(function ($routeProvider) {
+  .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
-      .when('/', {
+      .when('/applications', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        controller: 'MainCtrl',
+        resolve: {
+            user: [ 'Auth', function (Auth) {
+                return Auth.check();
+            }]
+        }
+      })
+      .when('/login', {
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl'
       })
       .when('/about', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/applications'
       });
-  });
+  }])
+  .run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, Auth) {
+    $rootScope.$on('$routeChangeStart', function(event, next, current) {
+        if (next.$$route.restrictedAccess) {
+            if (Auth.check()) {
+            } else {
+                $location.path('/login');
+            }
+        }
+    });
+  }]);

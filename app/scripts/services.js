@@ -43,3 +43,17 @@ services.factory('filterService', function () {
         searchText: ''
     };
 });
+
+services.factory('Auth', [ '$q', '$http', '$location', '$rootScope', function ($q, $http, $location, $rootScope) {
+    return {
+        check: function () {
+            return $http.get('/auth/user').then(function (res) {
+                if (res.status === 200 && res.data) {
+                    $rootScope.user = res.data;
+                } else {
+                    $location.url('/login');
+                }
+            });
+        }
+    };
+}]);

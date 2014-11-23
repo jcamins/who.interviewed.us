@@ -81,13 +81,17 @@ function loggedIn(req, res, next) {
     res.status(401).send({ });
 }
 
+app.get('/auth/user', loggedIn, function (req, res) {
+    res.send(req.session.passport.user);
+});
+
 app.get('/auth/google', passport.authenticate('google', { scope: 'https://www.googleapis.com/auth/userinfo.email' }));
 
-app.get('/auth/google/return', passport.authenticate('google', { successRedirect: '/', failureRedirect: '/login' }));
+app.get('/auth/google/return', passport.authenticate('google', { successRedirect: '/', failureRedirect: '/#/login' }));
 
 app.get('/auth/logout', function (req, res) {
     req.logout();
-    res.redirect('/');
+    res.redirect('/#/login');
 });
 
 app.listen(10000, function () {

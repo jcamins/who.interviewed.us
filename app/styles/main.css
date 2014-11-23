@@ -1,0 +1,14 @@
+a.signin-google {
+    height: 42px;
+    width: 197px;
+    display: block;
+    background-image: url('/images/google-signin.png');
+}
+
+a.signin-google:active {
+    background-image: url('/images/google-signin-press.png');
+}
+
+a.signin-google:hover {
+    background-image: url('/images/google-signin-hover.png');
+}
