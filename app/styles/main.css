@@ -12,3 +12,9 @@ a.signin-google:active {
 a.signin-google:hover {
     background-image: url('/images/google-signin-hover.png');
 }
+
+footer {
+    margin-top: 3em;
+    padding: 8px;
+    border-top: 1px solid #eee;
+}

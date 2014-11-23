@@ -46,7 +46,7 @@ angular
   }])
   .run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, Auth) {
     $rootScope.$on('$routeChangeStart', function(event, next, current) {
-        if (next.$$route.restrictedAccess) {
+        if (next && next.$$route && next.$$route.restrictedAccess) {
             if (Auth.check()) {
             } else {
                 $location.path('/login');
