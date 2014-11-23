@@ -26,8 +26,9 @@ angular
       .when('/applications', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
+        restrictedAccess: true,
         resolve: {
-            user: [ 'Auth', function (Auth) {
+            auth: [ 'Auth', function (Auth) {
                 return Auth.check();
             }]
         }
@@ -36,21 +37,27 @@ angular
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
-      })
       .otherwise({
         redirectTo: '/applications'
       });
   }])
-  .run(['$rootScope', '$location', 'Auth', function ($rootScope, $location, Auth) {
-    $rootScope.$on('$routeChangeStart', function(event, next, current) {
-        if (next && next.$$route && next.$$route.restrictedAccess) {
-            if (Auth.check()) {
-            } else {
-                $location.path('/login');
+  .factory('authInterceptor', ['$q', '$location', function($q, $location) {
+    return {
+        responseError: function (rejection) {
+            if (status === 401) {
+                $location.path('/auth/login');
             }
+            return $q.reject(rejection);
+        }
+    };
+  }])
+  .config(['$httpProvider', function($httpProvider) {
+    $httpProvider.interceptors.push('authInterceptor');
+  }])
+  .run(['$rootScope', '$location', function ($rootScope, $location) {
+    $rootScope.$on('$routeChangeError', function(event, next, current, error) {
+        if (error.status === 401) {
+            $location.path('/login');
         }
     });
   }]);

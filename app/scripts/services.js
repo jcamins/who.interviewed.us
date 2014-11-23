@@ -44,16 +44,42 @@ services.factory('filterService', function () {
     };
 });
 
-services.factory('Auth', [ '$q', '$http', '$location', '$rootScope', function ($q, $http, $location, $rootScope) {
-    return {
-        check: function () {
-            return $http.get('/auth/user').then(function (res) {
-                if (res.status === 200 && res.data) {
-                    $rootScope.user = res.data;
-                } else {
-                    $location.url('/login');
-                }
-            });
+services.factory('Auth', [ '$q', '$http', '$window', '$rootScope', '$location', function ($q, $http, $window, $rootScope, $location) {
+    function login() {
+    }
+    function logout() {
+        var deferred = $q.defer();
+
+        $http({
+            method: 'GET',
+            url: '/auth/logout',
+        }).then(function (res) {
+            delete $window.sessionStorage['user'];
+            delete $rootScope.user;
+            deferred.resolve(res);
+        }, function (error) { deferred.reject(error); })
+        .finally(function () {
+            $location.path('/login');
+        });
+        return deferred.promise;
+    }
+    function check() {
+        var user = $window.sessionStorage['user'];
+        if (user) {
+            return $rootScope.user = JSON.parse(user);
         }
+        return $http.get('/auth/user').then(function (res) {
+            if (res.status === 200 && res.data) {
+                $rootScope.user = $window.sessionStorage['user'] = JSON.stringify(res.data);
+                return res.data;
+            } else {
+                throw({ status: 401 });
+            }
+        });
+    }
+    return {
+        login: login,
+        logout: logout,
+        check: check
     };
 }]);

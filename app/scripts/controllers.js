@@ -72,5 +72,6 @@ app.controller('MainCtrl', ['$scope', '$resource', '$timeout', 'JobApp', functio
 app.controller('LoginCtrl', function() {
 });
 
-app.controller('AboutCtrl', ['$scope', function ($scope) {
+app.controller('MenuCtrl', ['$scope', 'Auth', function ($scope, Auth) {
+    $scope.logout = Auth.logout;
 }]);

@@ -22,16 +22,14 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <header>
+    <header ng-controller="MenuCtrl">
         <nav class="navbar navbar-default navbar-static-top" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="/">Crystal Slipper</a>
                 </div>
                 <ul class="nav navbar-nav pull-right">
-                    <li ng-show="user"><a href="/auth/logout">Logout</a></li>
-                    <li><a ng-href="#/about">About</a></li>
-                    <li><a ng-href="#">Contact</a></li>
+                    <li ng-show="user"><a ng-click="logout()">Logout</a></li>
                 </ul>
             </div>
         </nav>
