@@ -21,31 +21,6 @@ app.use(bodyParser.json());
 //app.use(morgan(':remote-addr - - [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent" (:response-time ms)'));
 app.use(session({ secret: 'd7c067b3868afdfaa87177c650a872006cdca049', resave: true, saveUninitialized: true, store: new MongoStore({ db: 'crystalSlipper' }) }));
 
-app.use(express.static(path.normalize(__dirname + '/app')));
-app.use('/bower_components', express.static(path.normalize(__dirname + '/bower_components')));
-mongoose.connect('mongodb://127.0.0.1:27017/crystalSlipper');
-
-var Interview = mongoose.Schema({
-    type: String,
-    date: Date,
-    person: String,
-    feedback: String
-});
-
-var Application = restful.model('application', mongoose.Schema({
-    company: String,
-    position: String,
-    recruiter: {
-        company: {
-            name: String,
-            url: String
-        },
-        person: String
-    },
-    interviews: [ Interview ]
-})).methods([ { method: 'get', before: loggedIn }, { method: 'post', before: loggedIn }, { method: 'put', before: loggedIn }, { method: 'delete', before: loggedIn }]);
-Application.register(app, '/application');
-
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -73,13 +48,35 @@ passport.use(new GoogleStrategy({
 ));
 
 function loggedIn(req, res, next) {
-    if (typeof req.session !== 'undefined' && typeof req.session.passport !== 'undefined' && typeof req.session.passport.user !== 'undefined') {
-        if (typeof next === 'function') {
-            return next();
-        }
-    }
-    res.status(401).send({ });
+    if (req.isAuthenticated()) { return next(); }
+    return res.status(401).send({ });
 }
+
+app.use(express.static(path.normalize(__dirname + '/app')));
+app.use('/bower_components', express.static(path.normalize(__dirname + '/bower_components')));
+mongoose.connect('mongodb://127.0.0.1:27017/crystalSlipper');
+
+var Interview = mongoose.Schema({
+    type: String,
+    date: Date,
+    person: String,
+    feedback: String
+});
+
+var Application = restful.model('application', mongoose.Schema({
+    company: String,
+    position: String,
+    recruiter: {
+        company: {
+            name: String,
+            url: String
+        },
+        person: String
+    },
+    interviews: [ Interview ]
+})).methods([ { method: 'get', before: loggedIn }, { method: 'post', before: loggedIn }, { method: 'put', before: loggedIn }, { method: 'delete', before: loggedIn }]);
+Application.register(app, '/application');
+
 
 app.get('/auth/user', loggedIn, function (req, res) {
     res.send(req.session.passport.user);
