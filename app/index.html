@@ -29,7 +29,11 @@
                     <a class="navbar-brand" href="/">Crystal Slipper</a>
                 </div>
                 <ul class="nav navbar-nav pull-right">
-                    <li ng-show="user"><a ng-click="logout()">Logout</a></li>
+                    <li ng-show="user"><a data-toggle="dropdown"><img ng-show="user.picture" height="32" src="{{user.picture}}"><i ng-hide="user.picture" class="glyphicon glyphicon-user"></i><span class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                            <li><a ng-click="logout()">Logout</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </nav>

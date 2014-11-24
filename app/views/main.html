@@ -9,7 +9,7 @@
                     <td><button class="btn btn-xs" ng-click="removeApplication(jobapp)"><i class="glyphicon glyphicon-remove"></i></button></td>
                     <td>{{jobapp.position}}</td>
                     <td><a href="{{jobapp.site}}">{{jobapp.company}}</a></td>
-                    <td>{{jobapp.recruiter.person}} ({{jobapp.recruiter.company.name}})</td>
+                    <td>{{jobapp.recruiter.person}} ({{jobapp.recruiter.company}})</td>
                     <td>{{jobapp.interviews.length}}</td>
                     <td><button class="btn btn-xs" ng-click="selectApplication(jobapp)"><i class="glyphicon glyphicon-pencil"></i></button></td>
                 </tr>
@@ -30,11 +30,12 @@
                     <h4>Recruiter</h4>
                     <div class="form-group">
                         <cp-input label="Person" ng-model="current.recruiter.person"></cp-input>
-                        <div class="input-group">
+                        <cp-input label="Company" prefix="at" ng-model="current.recruiter.company"></cp-input>
+                        <!--<div class="input-group">
                             <label class="sr-only" for="form-recruiter-company">Company</label>
                             <div class="input-group-addon">at</div>
                             <input id="form-recruiter-company" class="form-control sf-typeahead" type="text" datasets="recruitercompanies" placeholder="Company" ng-model="current.recruiter.company"><a class="input-group-addon" target="_blank" href="{{current.recruiter.company.url}}"><i class="glyphicon glyphicon-link"></i></a>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
                 <h4>Interviews <button class="btn btn-xs"><i class="glyphicon glyphicon-plus" ng-click="current.interviews.push({})"></i></button></h4>

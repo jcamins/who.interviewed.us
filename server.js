@@ -38,16 +38,14 @@ passport.use(new GoogleStrategy({
     },
     function(accessToken, refreshToken, profile, done) {
         User.findOne({ username: profile.emails[0].value }, function (err, user) {
-            if (err) {
-                return done(err, null);
-            } else if (user) {
-                return done(null, user);
+            if (err || user) {
+                return done(err, user);
             } else {
                 User.create({
                     username: profile.emails[0].value,
                     googleId: profile.id,
-                    name: profile.name,
-                    picture: profile.picture
+                    name: profile.displayName,
+                    picture: profile._json.picture
                 }, done);
             }
         });
@@ -92,6 +90,9 @@ Application.register(app, '/application');
 
 
 app.get('/auth/user', loggedIn, function (req, res) {
+    if (req.user.password) {
+        delete req.user.password;
+    }
     res.send(req.user);
 });
 
