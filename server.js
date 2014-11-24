@@ -12,14 +12,15 @@ var path = require('path'),
     GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
     bcrypt = require('bcrypt'),
     restful = require('node-restful'),
-    mongoose = restful.mongoose;
+    mongoose = restful.mongoose,
+    config = require('./config');
 
 var app = express();
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 //app.use(morgan(':remote-addr - - [:date] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent" (:response-time ms)'));
-app.use(session({ secret: 'd7c067b3868afdfaa87177c650a872006cdca049', resave: true, saveUninitialized: true, store: new MongoStore({ db: 'crystalSlipper' }) }));
+app.use(session({ secret: config.session.secret, resave: true, saveUninitialized: true, store: new MongoStore({ db: config.session.db }) }));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -32,9 +33,9 @@ passport.deserializeUser(function(obj, done) {
 });
 
 passport.use(new GoogleStrategy({
-        clientID: '453793674030-o5gs3u80rddrdpf2u4tlmtsqnkuejl7s.apps.googleusercontent.com',
-        clientSecret: '1_5ZqNUL5etywK4iqd0zHO2s',
-        callbackURL: "http://localhost:10000/auth/google/return"
+        clientID: config.google.clientID,
+        clientSecret: config.google.clientSecret,
+        callbackURL: config.url + "auth/google/return"
     },
     function(accessToken, refreshToken, profile, done) {
         User.findOne({ username: profile.emails[0].value }, function (err, user) {
@@ -58,7 +59,7 @@ function loggedIn(req, res, next) {
 
 app.use(express.static(path.normalize(__dirname + '/app')));
 app.use('/bower_components', express.static(path.normalize(__dirname + '/bower_components')));
-mongoose.connect('mongodb://127.0.0.1:27017/crystalSlipper');
+mongoose.connect(config.database);
 
 var UserSchema = mongoose.Schema({
     username: String,
