@@ -32,23 +32,29 @@ passport.deserializeUser(function(obj, done) {
 });
 
 passport.use(new GoogleStrategy({
-    clientID: '453793674030-o5gs3u80rddrdpf2u4tlmtsqnkuejl7s.apps.googleusercontent.com',
-    clientSecret: '1_5ZqNUL5etywK4iqd0zHO2s',
-    callbackURL: "http://localhost:10000/auth/google/return"
-  },
-  function(accessToken, refreshToken, profile, done) {
-    process.nextTick(function () {
-        // To keep the example simple, the user's Google profile is returned to
-        // represent the logged-in user. In a typical application, you would want
-        // to associate the Google account with a user record in your database,
-        // and return that user instead.
-        return done(null, profile);
-    });
-  }
-));
+        clientID: '453793674030-o5gs3u80rddrdpf2u4tlmtsqnkuejl7s.apps.googleusercontent.com',
+        clientSecret: '1_5ZqNUL5etywK4iqd0zHO2s',
+        callbackURL: "http://localhost:10000/auth/google/return"
+    },
+    function(accessToken, refreshToken, profile, done) {
+        User.findOne({ username: profile.emails[0].value }, function (err, user) {
+            if (err) {
+                return done(err, null);
+            } else if (user) {
+                return done(null, user);
+            } else {
+                User.create({
+                    username: profile.emails[0].value,
+                    googleId: profile.id,
+                    name: profile.name,
+                    picture: profile.picture
+                }, done);
+            }
+        });
+    }));
 
 function loggedIn(req, res, next) {
-    if (req.isAuthenticated()) { return next(); }
+    if (req.isAuthenticated()) { req.query.user = req.body.user = req.user.username; return next(); }
     return res.status(401).send({ });
 }
 
@@ -56,7 +62,16 @@ app.use(express.static(path.normalize(__dirname + '/app')));
 app.use('/bower_components', express.static(path.normalize(__dirname + '/bower_components')));
 mongoose.connect('mongodb://127.0.0.1:27017/crystalSlipper');
 
-var Interview = mongoose.Schema({
+var UserSchema = mongoose.Schema({
+    username: String,
+    googleId: String,
+    name: String,
+    picture: String,
+    password: String
+});
+var User = mongoose.model('User', UserSchema);
+
+var InterviewSchema = mongoose.Schema({
     type: String,
     date: Date,
     person: String,
@@ -64,22 +79,20 @@ var Interview = mongoose.Schema({
 });
 
 var Application = restful.model('application', mongoose.Schema({
+    user: String,
     company: String,
     position: String,
     recruiter: {
-        company: {
-            name: String,
-            url: String
-        },
+        company: String,
         person: String
     },
-    interviews: [ Interview ]
+    interviews: [ InterviewSchema ]
 })).methods([ { method: 'get', before: loggedIn }, { method: 'post', before: loggedIn }, { method: 'put', before: loggedIn }, { method: 'delete', before: loggedIn }]);
 Application.register(app, '/application');
 
 
 app.get('/auth/user', loggedIn, function (req, res) {
-    res.send(req.session.passport.user);
+    res.send(req.user);
 });
 
 app.get('/auth/google', passport.authenticate('google', { scope: 'https://www.googleapis.com/auth/userinfo.email' }));
