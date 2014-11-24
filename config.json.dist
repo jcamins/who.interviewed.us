@@ -1,0 +1,12 @@
+{
+    "url": "http://localhost:10000/",
+    "google": {
+        "clientID": "453793674030-o5gs3u80rddrdpf2u4tlmtsqnkuejl7s.apps.googleusercontent.com",
+        "clientSecret": "1_5ZqNUL5etywK4iqd0zHO2s"
+    },
+    "database": "mongodb://127.0.0.1:27017/crystalSlipper",
+    "session": {
+        "secret": "d7c067b3868afdfaa87177c650a872006cdca049",
+        "db": "crystalSlipper"
+    }
+}
