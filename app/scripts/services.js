@@ -46,6 +46,11 @@ services.factory('filterService', function () {
 
 services.factory('Auth', [ '$q', '$http', '$window', '$rootScope', '$location', function ($q, $http, $window, $rootScope, $location) {
     function login(user) {
+        return $http({
+            method: 'POST',
+            url: '/auth/login',
+            data: user
+        });
     }
     function createUser(user) {
         return $http({

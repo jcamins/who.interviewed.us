@@ -4,23 +4,24 @@
             <h3>Log in</h3>
         </div>
         <div class="col-md-4">
-            <form class="form-horizontal" role="form">
+            <form name="loginForm" class="form-horizontal" role="form">
                 <h4>with a username/password</h4>
                 <div ng-show="newuser" class="form-group">
                     <label for="name" class="col-sm-3 control-label">Full name</label>
-                    <input type="text" placeholder="John Smith" ng-model="user.name">
+                    <input type="text" placeholder="John Smith" ng-model="user.name" ng-required="newuser">
                 </div>
                 <div class="form-group">
                     <label for="username" class="col-sm-3 control-label">Username</label>
-                    <input type="text" placeholder="you@youraddress.com" ng-model="user.username">
+                    <input type="text" placeholder="you@youraddress.com" ng-model="user.username" required>
                 </div>
                 <div class="form-group">
                     <label for="password" class="col-sm-3 control-label">Password</label>
-                    <input type="password" ng-model="user.password">
+                    <input type="password" ng-model="user.password" required>
                 </div>
-                <div class="alert alert-danger" ng-show="usererr">There was an error</div>
-                <div ng-show="!newuser"><button class="btn btn-primary" ng-click="login()">Log in</button> <span>or, <a href ng-click="newuser = true">create new user</a></span></div>
-                <div ng-show="newuser"><button class="btn btn-primary" ng-click="createUser()">Create user</button> <span>or, <a href ng-click="newuser = false">existing users, login</a></span></div>
+                <div class="alert alert-danger" ng-show="usererr.badcredentials">Unknown username or password</div>
+                <div class="alert alert-danger" ng-show="usererr.system">System error: {{usererr.system}}</div>
+                <div class="alert alert-danger" ng-show="usererr.userexists">Username already taken</div>
+                <button type="submit" class="btn btn-primary" ng-disabled="loginForm.$invalid" ng-click="submit(user, newuser)"><span ng-show="!newuser">Log in</span><span ng-show="newuser">Create user</span></button> <span>or, <a href ng-show="!newuser" ng-click="newuser = true">create new user</a><a href ng-show="newuser" ng-click="newuser = false">existing users, login</a></span>
             </form>
         </div>
         <div class="col-md-4">

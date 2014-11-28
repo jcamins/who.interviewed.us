@@ -70,15 +70,12 @@ app.controller('MainCtrl', ['$scope', '$resource', '$timeout', 'JobApp', functio
 }]);
 
 app.controller('LoginCtrl', [ '$scope', '$location', 'Auth', function($scope, $location, Auth) {
-    $scope.login = function () {
-        Auth.login($scope.user);
-    };
-
-    $scope.createUser = function () {
-        Auth.createUser($scope.user).then(function (res) {
+    $scope.submit = function (user, newuser) {
+        var action = newuser ? Auth.createUser(user) : Auth.login(user);
+        action.then(function () {
             $location.path('/');
         }, function (err) {
-            $scope.usererr = err;
+            $scope.usererr = err.data.error || { error: true };
         });
     };
 }]);

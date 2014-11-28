@@ -14,6 +14,7 @@ var path = require('path'),
     bcrypt = require('bcrypt'),
     restful = require('node-restful'),
     mongoose = restful.mongoose,
+    bcrypt = require('bcrypt'),
     config = require('./config');
 
 var UserSchema = mongoose.Schema({
@@ -48,6 +49,25 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(username, done) {
     User.findOne({ username: username }, done);
 });
+
+passport.use(new LocalStrategy(
+    function(username, password, done) {
+        User.findOne({ username: username }, function (err, user) {
+            if (err) { return done(err); }
+            if (!user) {
+                return done(null, false, { error: { badcredentials: true } });
+            }
+            bcrypt.compare(password, user.password, function (err, res) {
+                if (err) return done(err);
+                if (res) {
+                    return done(null, user);
+                } else {
+                    return done(null, false, { error: { badcredentials: true } });
+                }
+            });
+        });
+    }
+));
 
 passport.use(new GoogleStrategy({
         clientID: config.google.clientID,
@@ -94,14 +114,14 @@ Application.register(app, '/application');
 app.get('/auth/user', loggedIn, function (req, res) {
     User.findOne({ username: req.user }, function (err, user) {
         if (err) {
-            res.send({ error: { system: err } });
+            res.status(401).send({ error: { system: err } });
         } else if (user) {
             if (user.password) {
                 delete user.password;
             }
             res.send(user);
         } else {
-            res.send({ error: { nouser: true } });
+            res.status(401).send({ error: { nouser: true } });
         }
     });
 });
@@ -109,17 +129,26 @@ app.get('/auth/user', loggedIn, function (req, res) {
 app.post('/auth/user', function (req, res) {
     User.findOne({ username: req.body.username }, function (err, user) {
         if (err) {
-            res.send({ error: { system: err } });
+            res.status(401).send({ error: { system: err } });
         } else if (user) {
-            res.send({ error: { userexists: true } });
+            res.status(403).send({ error: { userexists: true } });
         } else {
-            user = new User({
-                name: req.body.name,
-                username: req.body.username,
-                password: req.body.password
+            bcrypt.genSalt(10, function (err, salt) {
+                if (err) return res.send({ error: { system: err } });
+                bcrypt.hash(req.body.password, salt, function (err, password) {
+                    if (err) return res.send({ error: { system: err } });
+                    user = new User({
+                        name: req.body.name,
+                        username: req.body.username,
+                        password: password
+                    });
+                    user.save();
+                    req.login(user, function (err) {
+                        if (err) return res.send({ error: { system: err } });
+                        res.send({ success: true });
+                    });
+                });
             });
-            user.save();
-            res.send({ success: true });
         }
     });
 });
@@ -128,18 +157,21 @@ app.put('/auth/user', loggedIn, function (req, res) {
     if (req.body.username !== req.user) return res.status(401).send({ error: { unauthorized: true } });
     User.findOne({ username: req.body.username }, function (err, user) {
         if (err) {
-            res.send({ error: { system: err } });
+            res.status(401).send({ error: { system: err } });
         } else if (user === null) {
-            res.send({ error: { nouser: true } });
+            res.status(401).send({ error: { nouser: true } });
         } else {
             user.name = req.body.name || user.name;
             user.password = req.body.password || user.password;
             user.save();
+            res.send({ success: true });
         }
     });
 });
 
-app.post('/auth/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/#/login' }));
+app.post('/auth/login', passport.authenticate('local'), function (req, res) {
+    res.send({ success: true });
+});
 
 app.get('/auth/google', passport.authenticate('google', { scope: 'https://www.googleapis.com/auth/userinfo.email' }));
 
