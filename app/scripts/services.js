@@ -45,7 +45,14 @@ services.factory('filterService', function () {
 });
 
 services.factory('Auth', [ '$q', '$http', '$window', '$rootScope', '$location', function ($q, $http, $window, $rootScope, $location) {
-    function login() {
+    function login(user) {
+    }
+    function createUser(user) {
+        return $http({
+            method: 'POST',
+            url: '/auth/user',
+            data: user
+        });
     }
     function logout() {
         var deferred = $q.defer();
@@ -54,7 +61,7 @@ services.factory('Auth', [ '$q', '$http', '$window', '$rootScope', '$location', 
             method: 'GET',
             url: '/auth/logout',
         }).then(function (res) {
-            delete $window.sessionStorage['user'];
+            delete $window.sessionStorage.user;
             delete $rootScope.user;
             deferred.resolve(res);
         }, function (error) { deferred.reject(error); })
@@ -64,13 +71,14 @@ services.factory('Auth', [ '$q', '$http', '$window', '$rootScope', '$location', 
         return deferred.promise;
     }
     function check() {
-        var user = $window.sessionStorage['user'];
+        var user = $window.sessionStorage.user;
         if (user) {
-            return $rootScope.user = JSON.parse(user);
+            $rootScope.user = JSON.parse(user);
+            return $rootScope.user;
         }
         return $http.get('/auth/user').then(function (res) {
             if (res.status === 200 && res.data) {
-                $rootScope.user = $window.sessionStorage['user'] = JSON.stringify(res.data);
+                $rootScope.user = $window.sessionStorage.user = JSON.stringify(res.data);
                 return res.data;
             } else {
                 throw({ status: 401 });
@@ -80,6 +88,7 @@ services.factory('Auth', [ '$q', '$http', '$window', '$rootScope', '$location', 
     return {
         login: login,
         logout: logout,
-        check: check
+        check: check,
+        createUser: createUser
     };
 }]);

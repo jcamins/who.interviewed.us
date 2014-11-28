@@ -25,7 +25,7 @@ app.controller('MainCtrl', ['$scope', '$resource', '$timeout', 'JobApp', functio
         }
     };
     $scope.saveApplication = function () {
-        var isnew = typeof $scope.current._id === 'undefined'
+        var isnew = typeof $scope.current._id === 'undefined';
         delete $scope.current.dirty;
         $scope.current.$save().then(function (rec) {
             $scope.currentForm.$setPristine(true);
@@ -69,8 +69,19 @@ app.controller('MainCtrl', ['$scope', '$resource', '$timeout', 'JobApp', functio
     });
 }]);
 
-app.controller('LoginCtrl', function() {
-});
+app.controller('LoginCtrl', [ '$scope', '$location', 'Auth', function($scope, $location, Auth) {
+    $scope.login = function () {
+        Auth.login($scope.user);
+    };
+
+    $scope.createUser = function () {
+        Auth.createUser($scope.user).then(function (res) {
+            $location.path('/');
+        }, function (err) {
+            $scope.usererr = err;
+        });
+    };
+}]);
 
 app.controller('MenuCtrl', ['$scope', 'Auth', function ($scope, Auth) {
     $scope.logout = Auth.logout;
