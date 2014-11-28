@@ -1,5 +1,7 @@
 {
-    "url": "http://localhost:10000/",
+    "protocol": "http",
+    "host": "localhost",
+    "port": 10000,
     "google": {
         "clientID": "453793674030-o5gs3u80rddrdpf2u4tlmtsqnkuejl7s.apps.googleusercontent.com",
         "clientSecret": "1_5ZqNUL5etywK4iqd0zHO2s"
