@@ -112,7 +112,7 @@ Application.register(app, '/application');
 
 
 app.get('/auth/user', loggedIn, function (req, res) {
-    User.findOne({ username: req.user }, function (err, user) {
+    User.findOne({ username: req.user.username }, function (err, user) {
         if (err) {
             res.status(401).send({ error: { system: err } });
         } else if (user) {
