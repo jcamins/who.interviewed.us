@@ -2,24 +2,24 @@
 
 /**
  * @ngdoc overview
- * @name crystalSlipperApp
+ * @name whoInterviewedUsApp
  * @description
- * # crystalSlipperApp
+ * # whoInterviewedUsApp
  *
  * Main module of the application.
  */
 angular
-  .module('crystalSlipperApp', [
+  .module('whoInterviewedUsApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'crystalSlipper.services',
+    'whoInterviewedUs.services',
     'siyfion.sfTypeahead',
     'ui.bootstrap',
-    'crystalSlipper.directives'
+    'whoInterviewedUs.directives'
   ])
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider

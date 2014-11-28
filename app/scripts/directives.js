@@ -1,6 +1,6 @@
 'use strict';
 
-var directives = angular.module('crystalSlipper.directives', [ ]);
+var directives = angular.module('whoInterviewedUs.directives', [ ]);
 
 directives.directive('cpDatepicker', function() {
     return {

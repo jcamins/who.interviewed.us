@@ -1,13 +1,13 @@
 'use strict';
 
-var app = angular.module('crystalSlipperApp');
+var app = angular.module('whoInterviewedUsApp');
 
 /**
  * @ngdoc function
- * @name crystalSlipperApp.controller:MainCtrl
+ * @name whoInterviewedUsApp.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the crystalSlipperApp
+ * Controller of the whoInterviewedUsApp
  */
 app.controller('MainCtrl', ['$scope', '$resource', '$timeout', 'JobApp', function ($scope, $resource, $timeout, JobApp) {
     $scope.newApplication = function () {
