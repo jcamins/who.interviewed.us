@@ -2,6 +2,8 @@
     "protocol": "http",
     "host": "localhost",
     "port": 10000,
+    "listenport": 10000,
+    "listenhost": "0.0.0.0",
     "google": {
         "clientID": "453793674030-o5gs3u80rddrdpf2u4tlmtsqnkuejl7s.apps.googleusercontent.com",
         "clientSecret": "1_5ZqNUL5etywK4iqd0zHO2s"

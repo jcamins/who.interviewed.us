@@ -18,6 +18,7 @@ var path = require('path'),
     config = require('./config');
 
 config.listenport = config.listenport || config.port || 10000;
+config.listenhost = config.listenhost || '0.0.0.0';
 
 var UserSchema = mongoose.Schema({
     username: String,
@@ -184,6 +185,6 @@ app.get('/auth/logout', function (req, res) {
     res.redirect('/#/login');
 });
 
-app.listen(config.listenport, function () {
+app.listen(config.listenport, config.listenhost, function () {
     console.log('Server started on port ' + config.listenport);
 });
