@@ -17,7 +17,7 @@ var path = require('path'),
     bcrypt = require('bcrypt'),
     config = require('./config');
 
-config.port = config.port || 10000;
+config.listenport = config.listenport || config.port || 10000;
 
 var UserSchema = mongoose.Schema({
     username: String,
@@ -74,7 +74,7 @@ passport.use(new LocalStrategy(
 passport.use(new GoogleStrategy({
         clientID: config.google.clientID,
         clientSecret: config.google.clientSecret,
-        callbackURL: (config.protocol || 'http') + '://' + config.host + ':' + config.port + "/auth/google/return"
+        callbackURL: (config.protocol || 'http') + '://' + config.host + (config.port ? ':' + config.port : '') + "/auth/google/return"
     },
     function(accessToken, refreshToken, profile, done) {
         User.findOne({ username: profile.emails[0].value }, function (err, user) {
@@ -184,6 +184,6 @@ app.get('/auth/logout', function (req, res) {
     res.redirect('/#/login');
 });
 
-app.listen(config.port, function () {
-    console.log('Server started on port ' + config.port);
+app.listen(config.listenport, function () {
+    console.log('Server started on port ' + config.listenport);
 });
