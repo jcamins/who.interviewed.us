@@ -233,6 +233,16 @@ module.exports = function (grunt) {
     // concat: {
     //   dist: {}
     // },
+    less: {
+      options: {
+        cleancss: true
+      },
+      dist: {
+        files: {
+          'app/styles/main.css': 'app/styles/main.less',
+        }
+      }
+    },
 
     imagemin: {
       dist: {

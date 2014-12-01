@@ -1,5 +1,7 @@
 'use strict';
 
+var indexContent = document.querySelector('#viewContent').innerHTML;
+
 /**
  * @ngdoc overview
  * @name whoInterviewedUsApp
@@ -24,8 +26,8 @@ angular
   .config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('/applications', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
+        templateUrl: 'views/applications.html',
+        controller: 'ApplicationsCtrl',
         restrictedAccess: true,
         resolve: {
             auth: [ 'Auth', function (Auth) {
@@ -37,8 +39,12 @@ angular
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
       })
+      .when('/', {
+        template: function () { return indexContent; },
+        controller: 'IndexCtrl'
+      })
       .otherwise({
-        redirectTo: '/applications'
+        redirectTo: '/'
       });
   }])
   .factory('authInterceptor', ['$q', '$location', function($q, $location) {

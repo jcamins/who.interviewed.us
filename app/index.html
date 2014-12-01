@@ -8,7 +8,6 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/typeahead.js-bootstrap3.less/typeahead.css" />
     <!-- endbower -->
     <!-- endbuild -->
@@ -29,7 +28,7 @@
                     <a class="navbar-brand" href="/">who.Interviewed.Us</a>
                 </div>
                 <ul class="nav navbar-nav pull-right">
-                    <li ng-show="user"><a data-toggle="dropdown"><img ng-show="user.picture" height="32" ng-src="{{user.picture}}"><i ng-hide="user.picture" class="glyphicon glyphicon-user"></i><span class="caret"></span></a>
+                    <li ng-show="user"><a data-toggle="dropdown"><img ng-show="user.picture" height="32" ng-src="{{user.picture}}"><i ng-hide="user.picture" class="fa fa-user"></i><span class="caret"></span></a>
                         <ul class="dropdown-menu dropdown-menu-right" role="menu">
                             <li><a ng-click="logout()">Logout</a></li>
                         </ul>
@@ -39,11 +38,29 @@
         </nav>
     </header>
 
-    <div class="container-fluid" ng-view=""></div>
+    <div class="container-fluid" id="viewContent" ng-view="">
+        <h1>who.Interviewed.Us</h1>
+        <section>
+            <h2>Professional Summary</h2>
+        </section>
+        <section>
+            <h2>Experience</h2>
+        </section>
+        <section>
+            <h2>Education</h2>
+        </section>
+    </div>
 
-    <footer>
-        <div class="container-fluid">
-        who.Interviewed.Us &copy; 2014 C &amp; P Bibliography Services
+    <footer class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+                <h4></h4>
+            </div>
+            <div class="col-md-4">
+                who.Interviewed.Us &copy; 2014 C &amp; P Bibliography Services
+            </div>
         </div>
     </footer>
 

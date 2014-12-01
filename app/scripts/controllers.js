@@ -4,12 +4,12 @@ var app = angular.module('whoInterviewedUsApp');
 
 /**
  * @ngdoc function
- * @name whoInterviewedUsApp.controller:MainCtrl
+ * @name whoInterviewedUsApp.controller:ApplicationsCtrl
  * @description
- * # MainCtrl
+ * # ApplicationsCtrl
  * Controller of the whoInterviewedUsApp
  */
-app.controller('MainCtrl', ['$scope', '$resource', '$timeout', 'JobApp', function ($scope, $resource, $timeout, JobApp) {
+app.controller('ApplicationsCtrl', ['$scope', '$resource', '$timeout', 'JobApp', function ($scope, $resource, $timeout, JobApp) {
     $scope.newApplication = function () {
         $scope.current = new JobApp({ interviews: [ ] });
     };
@@ -73,7 +73,7 @@ app.controller('LoginCtrl', [ '$scope', '$location', 'Auth', function($scope, $l
     $scope.submit = function (user, newuser) {
         var action = newuser ? Auth.createUser(user) : Auth.login(user);
         action.then(function () {
-            $location.path('/');
+            $location.path('/applications');
         }, function (err) {
             $scope.usererr = err.data.error || { error: true };
         });
@@ -83,3 +83,6 @@ app.controller('LoginCtrl', [ '$scope', '$location', 'Auth', function($scope, $l
 app.controller('MenuCtrl', ['$scope', 'Auth', function ($scope, Auth) {
     $scope.logout = Auth.logout;
 }]);
+
+app.controller('IndexCtrl', function () {
+});
