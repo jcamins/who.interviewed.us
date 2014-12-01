@@ -20,6 +20,7 @@ angular
     'ngTouch',
     'whoInterviewedUs.services',
     'siyfion.sfTypeahead',
+    'ui.utils',
     'ui.bootstrap',
     'whoInterviewedUs.directives'
   ])

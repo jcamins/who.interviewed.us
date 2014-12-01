@@ -58,6 +58,13 @@
 // Font Awesome is AWESOME
 @import "../../bower_components/font-awesome/less/font-awesome.less";
 
+.fancy-radius(@h, @v) {
+    border-top-left-radius: @h @v;
+    border-bottom-left-radius: @h @v;
+    border-top-right-radius: @h @v;
+    border-bottom-right-radius: @h @v;
+}
+
 h1, h2, h3 {
     color: @brand-primary;
 }
@@ -76,17 +83,34 @@ button {
 }
 
 #resume-toc {
-    margin-top: 6em;
+    img {
+        margin: 2em;
+    }
 }
 
 .nav-stacked > li {
     & + li {
         margin-top: 3em;
     }
+
+    & > a {
+        padding: 0.5em 2em;
+    }
+
+    &.active:hover > a {
+        background-color: lighten(@brand-primary, 13.5%);
+    }
 }
 
-.resume-content h2 {
-    border-bottom: @brand-primary 1px solid;
+.resume-content {
+    h1 {
+        color: @text-color;
+    }
+    h2 {
+        margin-top: 1.5em;
+        border-bottom: @brand-primary 1px solid;
+        font-size: ceil((@font-size-base * 1.7));
+    }
 }
 
 a.signin-google {
