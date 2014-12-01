@@ -84,5 +84,9 @@ app.controller('MenuCtrl', ['$scope', 'Auth', function ($scope, Auth) {
     $scope.logout = Auth.logout;
 }]);
 
-app.controller('IndexCtrl', function () {
-});
+app.controller('IndexCtrl', ['$scope', '$location', '$anchorScroll', function ($scope, $location, $anchorScroll) {
+    $scope.scrolltoHref = function (id){
+        $location.hash(id);
+        $anchorScroll();
+    };
+}]);

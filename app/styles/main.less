@@ -3,6 +3,9 @@
 @import "../../bower_components/bootstrap/less/variables.less";
 @import "../../bower_components/bootstrap/less/mixins.less";
 
+@brand-primary:    #955;
+@component-active-bg: #955;
+
 // Reset and dependencies
 @import "../../bower_components/bootstrap/less/normalize.less";
 @import "../../bower_components/bootstrap/less/print.less";
@@ -55,6 +58,37 @@
 // Font Awesome is AWESOME
 @import "../../bower_components/font-awesome/less/font-awesome.less";
 
+h1, h2, h3 {
+    color: @brand-primary;
+}
+
+button {
+    color: black;
+}
+
+.who-interviewed-us {
+    font-family: monospace;
+}
+
+.blazon {
+    margin-top: 10em;
+    .rotate(270deg);
+}
+
+#resume-toc {
+    margin-top: 6em;
+}
+
+.nav-stacked > li {
+    & + li {
+        margin-top: 3em;
+    }
+}
+
+.resume-content h2 {
+    border-bottom: @brand-primary 1px solid;
+}
+
 a.signin-google {
     height: 42px;
     width: 197px;
@@ -78,6 +112,10 @@ footer {
 
 .nav a {
     cursor: pointer;
+}
+
+#resume-content {
+    position: relative;
 }
 
 .social-media-list {

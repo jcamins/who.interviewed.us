@@ -50,10 +50,7 @@ module.exports = function (grunt) {
       },
       less: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.less'],
-        tasks: ['less'],
-        options: {
-          livereload: '<%= connect.options.livereload %>'
-        }
+        tasks: ['less']
       },
       gruntfile: {
         files: ['Gruntfile.js']
