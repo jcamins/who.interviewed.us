@@ -38,6 +38,23 @@ services.factory('JobApp', ['$resource', function($resource) {
     return resource;
 }]);
 
+services.factory('Changelog', ['$resource', function($resource) {
+    return $resource('/changelog', { }, {
+        get: {
+            method: 'GET',
+            isArray: true,
+            transformResponse: [ angular.fromJson, function (data) {
+                if (data && data.forEach) {
+                    data.forEach(function (item, idx) {
+                        item.index = idx;
+                    });
+                }
+                return data;
+            } ]
+        }
+    });
+}]);
+
 services.factory('filterService', function () {
     return {
         searchText: ''

@@ -71,13 +71,14 @@
                 </section>
                 <section>
                     <h2 id="education">Education</h2>
-                    <ul>
-                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam maximus, magna non suscipit tincidunt.</li>
-                        <li>Nunc bibendum tristique dui, quis mollis diam vehicula sed. Nam interdum ultricies augue, vitae lacinia nisi dapibus at.</li>
-                        <li>Curabitur sapien dolor, rutrum sit amet ligula vitae.</li>
-                        <li>Donec a diam non elit commodo dignissim.</li>
-                        <li>Curabitur ut luctus ligula. Fusce pulvinar orci ut dui sollicitudin dapibus.</li>
-                    </ul>
+                    <table class="table" ng-show="changelog.length">
+                        <thead>
+                            <tr><th>Qualification</th><th>Supervisor</th><th>Year</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="change in changelog|orderBy:'-index':false"><td>{{change.feature}}</td><td>{{change.author}}</td><td>{{change.date}}</td></tr>
+                        </tbody>
+                    </table>
                 </section>
             </div>
         </div>
