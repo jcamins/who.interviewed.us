@@ -69,14 +69,21 @@
                         <li>Curabitur ut luctus ligula. Fusce pulvinar orci ut dui sollicitudin dapibus.</li>
                     </ul>
                 </section>
-                <section>
+                <section ng-cloak>
                     <h2 id="education">Education</h2>
                     <table class="table" ng-show="changelog.length">
                         <thead>
-                            <tr><th>Qualification</th><th>Supervisor</th><th>Year</th></tr>
+                            <tr><th>Qualification</th><th>Supervisor</th><th>Date</th></tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="change in changelog|orderBy:'-index':false"><td>{{change.feature}}</td><td>{{change.author}}</td><td>{{change.date}}</td></tr>
+                            <tr ng-class="{ 'emphasize': change.major }" ng-repeat="change in changelog|orderBy:'-index':false">
+                                <td ng-class="{ 'indent': !change.major }">{{change.feature}}
+                                    <a href ng-click="showDescription = !showDescription" ng-show="change.description"><i class="fa" ng-class="{ 'fa-chevron-right': !showDescription, 'fa-chevron-down': showDescription }"></i></a>
+                                    <div ng-show="showDescription" class="feature-description">{{change.description}}</div>
+                                </td>
+                                <td>{{change.author}}</td>
+                                <td>{{change.date}}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </section>

@@ -65,6 +65,18 @@
     border-bottom-right-radius: @h @v;
 }
 
+.emphasize {
+    font-weight: 500;
+}
+
+.indent {
+    padding-left: 2em !important;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
 h1, h2, h3 {
     color: @brand-primary;
 }
@@ -111,6 +123,14 @@ button {
         border-bottom: @brand-primary 1px solid;
         font-size: ceil((@font-size-base * 1.7));
     }
+}
+
+.feature-description {
+    .alert;
+    .alert-warning;
+    margin: 4px;
+    font-size: smaller;
+    padding: 8px;
 }
 
 a.signin-google {

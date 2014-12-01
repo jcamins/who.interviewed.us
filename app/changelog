@@ -1,12 +1,33 @@
 [
     {
-        "feature": "Enable login using your Google account",
+        "feature": "Add support for authentication using a Google account",
         "author": "Jared Camins-Esakov",
         "date": "November 22, 2014"
+    },
+    {
+        "feature": "Make system configurable",
+        "author": "Jared Camins-Esakov",
+        "date": "November 23, 2014"
+    },
+    {
+        "feature": "Add support for local authentication",
+        "author": "Jared Camins-Esakov",
+        "date": "November 28, 2014"
     },
     {
         "feature": "Rename application to who.Interviewed.Us",
         "author": "Jared Camins-Esakov",
         "date": "November 28, 2014"
+    },
+    {
+        "feature": "Deploy version 0.0.1",
+        "author": "Jared Camins-Esakov",
+        "date": "November 30, 2014",
+        "major": true
+    },
+    {
+        "feature": "Develop a coherent(ish) visual style",
+        "author": "Jared Camins-Esakov",
+        "date": "December 1, 2014"
     }
 ]
