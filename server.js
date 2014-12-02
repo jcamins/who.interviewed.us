@@ -178,7 +178,7 @@ app.post('/auth/login', passport.authenticate('local'), function (req, res) {
 
 app.get('/auth/google', passport.authenticate('google', { scope: 'https://www.googleapis.com/auth/userinfo.email' }));
 
-app.get('/auth/google/return', passport.authenticate('google', { successRedirect: '/', failureRedirect: '/#/login' }));
+app.get('/auth/google/return', passport.authenticate('google', { successRedirect: '/#/applications', failureRedirect: '/#/login' }));
 
 app.get('/auth/logout', function (req, res) {
     req.logout();
