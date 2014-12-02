@@ -43,12 +43,12 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-1 affix" data-offset-top="90">
+            <div class="no-mobile col-md-1 affix" data-offset-top="90">
                 <h1 class="who-interviewed-us blazon">who.Interviewed.Us</h1>
             </div>
             <div id="viewContent" class="col-md-offset-1" ng-view="" ng-controller="IndexCtrl">
-                <div id="resume-toc" class="col-md-2 affix" data-offset-top="90">
-                    <img src="images/interview.jpg" alt="Interview" class="img-responsive img-thumbnail" />
+                <div id="resume-toc" class="no-mobile col-md-2 affix" data-offset-top="90">
+                    <img src="images/interview.jpg" alt="Interview" class="img-responsive img-thumbnail portrait" />
                     <ul class="nav nav-pills nav-stacked">
                         <li><a ng-click="scrolltoHref('professional-summary')">Professional Summary</a></li>
                         <li><a ng-click="scrolltoHref('experience')">Experience</a></li>
@@ -56,6 +56,7 @@
                     </ul>
                 </div>
                 <div class="resume-content col-md-8 col-md-offset-2">
+                    <img src="images/interview.jpg" alt="Interview" class="only-mobile img-responsive img-thumbnail portrait" />
                     <h1 class="who-interviewed-us">who.Interviewed.Us</h1>
                     <section>
                         <h2 id="professional-summary">Professional Summary</h2>

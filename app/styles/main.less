@@ -91,6 +91,16 @@
     padding-left: 2em !important;
 }
 
+.no-mobile {
+    .hidden-sm;
+    .hidden-xs;
+}
+
+.only-mobile {
+    .visible-sm;
+    .visible-xs;
+}
+
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
 }
@@ -119,11 +129,9 @@ button {
     .rotate(270deg);
 }
 
-#resume-toc {
-    img {
-        margin: 1.5em 2em;
-        max-width: 75%;
-    }
+.portrait {
+    margin: 1.5em 2em;
+    max-width: 75%;
 }
 
 .nav-stacked > li {
@@ -174,7 +182,6 @@ a.signin-google {
 
 footer {
     bottom: 0;
-    position: absolute;
     width: 100%;
     margin-top: 3em;
     padding: 8px;
