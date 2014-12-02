@@ -13,7 +13,7 @@ directives.directive('cpDatepicker', function() {
             prefix: '@',
             closeText: '@'
         },
-        template: '<div class="input-group"><label class="sr-only">{{label}}</label><div class="input-group-addon" ng-show="prefix">{{prefix}}</div><input type="text" class="form-control" datepicker-popup="{{dateFormat}}" placeholder="{{label}}" ng-model="ngModel" is-open="opened" close-text="{{closeText}}" /><div class="input-group-btn"><button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button></div>',
+        template: '<div class="input-group"><label class="sr-only">{{label}}</label><div class="input-group-addon" ng-show="prefix">{{prefix}}</div><input type="text" class="form-control" datepicker-popup="{{dateFormat}}" placeholder="{{label}}" ng-model="ngModel" is-open="opened" close-text="{{closeText}}" /><div class="input-group-btn"><button type="button" class="btn btn-default" ng-click="open($event)"><i class="fa fa-calendar"></i></button></div>',
         link: function(scope) {
             scope.open = function ($event) {
                 $event.preventDefault();

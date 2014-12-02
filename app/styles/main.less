@@ -1,10 +1,28 @@
 // Required Bootstrap bits:
 // Core variables and mixins
+
+/* Color schema:
+ * #995555
+ * #ff8e8e
+ * #a6a56d
+ * #2e5166
+ * #74bae5
+ */
+
 @import "../../bower_components/bootstrap/less/variables.less";
 @import "../../bower_components/bootstrap/less/mixins.less";
 
 @brand-primary:    #955;
-@component-active-bg: #955;
+@brand-secondary:    #2e5166;
+@component-active-bg: @brand-primary;
+@navbar-inverse-bg: #2e5166;
+@state-info-text: #2e5166;
+@alert-info-bg: lighten(@brand-primary, 46.7%);
+@navbar-inverse-color: lighten(@brand-primary, 46.7%);
+@navbar-inverse-link-color: lighten(@brand-primary, 46.7%);
+@table-border-color: lighten(@brand-secondary, 46.7%);
+@body-bg: lighten(#74bae5, 27%);
+@font-family-base: 'Libre Baskerville', serif;
 
 // Reset and dependencies
 @import "../../bower_components/bootstrap/less/normalize.less";
@@ -66,7 +84,7 @@
 }
 
 .emphasize {
-    font-weight: 500;
+    font-style: italic;
 }
 
 .indent {
@@ -81,12 +99,19 @@ h1, h2, h3 {
     color: @brand-primary;
 }
 
+h4, h5, h6 {
+    color: @brand-secondary;
+}
+
 button {
     color: black;
 }
 
 .who-interviewed-us {
-    font-family: monospace;
+    font-family: 'Sorts Mill Goudy', serif;
+    font-style: italic;
+    text-transform: capitalize;
+    color: darken(@brand-primary, 20%);
 }
 
 .blazon {
@@ -115,9 +140,6 @@ button {
 }
 
 .resume-content {
-    h1 {
-        color: @text-color;
-    }
     h2 {
         margin-top: 1.5em;
         border-bottom: @brand-primary 1px solid;
@@ -127,9 +149,10 @@ button {
 
 .feature-description {
     .alert;
-    .alert-warning;
-    margin: 4px;
+    .alert-info;
+    margin: 4px 0;
     font-size: smaller;
+    font-style: normal;
     padding: 8px;
 }
 

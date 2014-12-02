@@ -3,7 +3,7 @@
     <div class="col-md-6">
         <input class="pull-right" type="text" id="searchTextBox" ng-model="filterService.searchText" placeholder="Filter">
         <table class="table">
-            <thead><tr><th></th><th>Position</th><th>Company</th><th>Recruiter</th><th>Interviews</th></tr></thead>
+            <thead><tr><th></th><th>Position</th><th>Company</th><th>Recruiter</th><th>Interviews</th><th></th></tr></thead>
             <tbody>
                 <tr class="jobapps" ng-repeat="jobapp in jobapps | filter:filterService.searchText">
                     <td><button class="btn btn-xs" ng-click="removeApplication(jobapp)"><i class="fa fa-remove"></i></button></td>
