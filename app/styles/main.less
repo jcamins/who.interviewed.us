@@ -121,7 +121,8 @@ button {
 
 #resume-toc {
     img {
-        margin: 2em;
+        margin: 1.5em 2em;
+        max-width: 75%;
     }
 }
 
@@ -174,7 +175,12 @@ a.signin-google {
 footer {
     margin-top: 3em;
     padding: 8px;
-    border-top: 1px solid #eee;
+    border-top: 1px solid lighten(@table-border-color, 12%);
+    font-size: small;
+
+    .credit {
+        font-size: smaller;
+    }
 }
 
 .nav a {
