@@ -23,7 +23,8 @@
         "feature": "Deploy version 0.0.1",
         "author": "Jared Camins-Esakov",
         "date": "November 30, 2014",
-        "major": true
+        "major": true,
+        "description": "First version released to the public."
     },
     {
         "feature": "Develop a coherent(ish) visual style",

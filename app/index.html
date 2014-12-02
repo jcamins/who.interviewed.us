@@ -41,53 +41,55 @@
         </nav>
     </header>
 
-    <div class="container-fluid" id="viewContent" ng-view="">
-        <div class="row" ng-controller="IndexCtrl">
+    <div class="container-fluid">
+        <div class="row">
             <div class="col-md-1 affix" data-offset-top="90">
                 <h1 class="who-interviewed-us blazon">who.Interviewed.Us</h1>
             </div>
-            <div id="resume-toc" class="col-md-2 col-md-offset-1 affix" data-offset-top="90">
-                <img src="images/interview.jpg" alt="Interview" class="img-responsive img-thumbnail" />
-                <ul class="nav nav-pills nav-stacked">
-                    <li><a ng-click="scrolltoHref('professional-summary')">Professional Summary</a></li>
-                    <li><a ng-click="scrolltoHref('experience')">Experience</a></li>
-                    <li><a ng-click="scrolltoHref('education')">Education</a></li>
-                </ul>
-            </div>
-            <div class="resume-content col-md-8 col-md-offset-3">
-                <h1 class="who-interviewed-us">who.Interviewed.Us</h1>
-                <section>
-                    <h2 id="professional-summary">Professional Summary</h2>
-                    <p class="paragraph">Easily keep track of your job search: what jobs did you apply to, at whose recommendation, who did you interview with, and what happened next?</p>
-                </section>
-                <section>
-                    <h2 id="experience">Experience</h2>
-                    <ul>
-                        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam maximus, magna non suscipit tincidunt.</li>
-                        <li>Nunc bibendum tristique dui, quis mollis diam vehicula sed. Nam interdum ultricies augue, vitae lacinia nisi dapibus at.</li>
-                        <li>Curabitur sapien dolor, rutrum sit amet ligula vitae.</li>
-                        <li>Donec a diam non elit commodo dignissim.</li>
-                        <li>Curabitur ut luctus ligula. Fusce pulvinar orci ut dui sollicitudin dapibus.</li>
+            <div id="viewContent" class="col-md-offset-1" ng-view="" ng-controller="IndexCtrl">
+                <div id="resume-toc" class="col-md-2 affix" data-offset-top="90">
+                    <img src="images/interview.jpg" alt="Interview" class="img-responsive img-thumbnail" />
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><a ng-click="scrolltoHref('professional-summary')">Professional Summary</a></li>
+                        <li><a ng-click="scrolltoHref('experience')">Experience</a></li>
+                        <li><a ng-click="scrolltoHref('education')">Education</a></li>
                     </ul>
-                </section>
-                <section ng-cloak>
-                    <h2 id="education">Education</h2>
-                    <table class="table" ng-show="changelog.length">
-                        <thead>
-                            <tr><th>Qualification</th><th>Supervisor</th><th>Date</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-class="{ 'emphasize': change.major }" ng-repeat="change in changelog|orderBy:'-index':false">
-                                <td ng-class="{ 'indent': !change.major }">{{change.feature}}
-                                    <a href ng-click="showDescription = !showDescription" ng-show="change.description"><i class="fa" ng-class="{ 'fa-chevron-right': !showDescription, 'fa-chevron-down': showDescription }"></i></a>
-                                    <div ng-show="showDescription" class="feature-description">{{change.description}}</div>
-                                </td>
-                                <td>{{change.author}}</td>
-                                <td>{{change.date}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
+                </div>
+                <div class="resume-content col-md-8 col-md-offset-2">
+                    <h1 class="who-interviewed-us">who.Interviewed.Us</h1>
+                    <section>
+                        <h2 id="professional-summary">Professional Summary</h2>
+                        <p class="paragraph">Easily keep track of your job search: what jobs did you apply to, at whose recommendation, who did you interview with, and what happened next?</p>
+                    </section>
+                    <section>
+                        <h2 id="experience">Experience</h2>
+                        <ul>
+                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam maximus, magna non suscipit tincidunt.</li>
+                            <li>Nunc bibendum tristique dui, quis mollis diam vehicula sed. Nam interdum ultricies augue, vitae lacinia nisi dapibus at.</li>
+                            <li>Curabitur sapien dolor, rutrum sit amet ligula vitae.</li>
+                            <li>Donec a diam non elit commodo dignissim.</li>
+                            <li>Curabitur ut luctus ligula. Fusce pulvinar orci ut dui sollicitudin dapibus.</li>
+                        </ul>
+                    </section>
+                    <section ng-cloak>
+                        <h2 id="education">Education</h2>
+                        <table class="table" ng-show="changelog.length">
+                            <thead>
+                                <tr><th>Qualification</th><th>Supervisor</th><th>Date</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-class="{ 'emphasize': change.major }" ng-repeat="change in changelog|orderBy:'-index':false">
+                                    <td ng-class="{ 'indent': !change.major }">{{change.feature}}
+                                        <a href ng-click="showDescription = !showDescription" ng-show="change.description"><i class="fa" ng-class="{ 'fa-chevron-right': !showDescription, 'fa-chevron-down': showDescription }"></i></a>
+                                        <div ng-show="showDescription" class="feature-description">{{change.description}}</div>
+                                    </td>
+                                    <td>{{change.author}}</td>
+                                    <td>{{change.date}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
             </div>
         </div>
     </div>
